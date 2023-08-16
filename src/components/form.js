@@ -4,33 +4,50 @@ import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 
+import EmailFormInput from './emailFormInput';
+import FirstNameFormInput from './firstNameFormInput';
+import LastNameFormInput from './lastNameFormInput';
+import PasswordFormInput from './passwordFormInput';
+import {Card, CardContent} from '@mui/material';
+import {Grid} from '@mui/material';
 
 export default function Form() {
 
+
+    const [userData, setuserData] = useState(
+        {
+            'firstName': '',
+            'lastName': '',
+            'email': '',
+            'password': ''
+        }
+    )
+
     const [submitActive, setSubmitActive] = useState(false)
 
-    const submitHandler = (submitActive) => {
-        setSubmitActive(!submitActive)
-    }
-
     return (
-        <div style={{display: 'grid', gridTemplateRows: '1fr 1fr 1fr'}}>
-            <div id='form' style={{ alignItems: 'center',}}>
-                <div style={{ margin: '10px'}}>
-                    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-                </div>
-                <div style={{ margin: '10px'}}>
-                    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-                </div>
-                <div style={{ margin: '10px'}}>
-                    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-                </div>
-                <div style={{ margin: '10px'}}>
-                    <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-                </div>
-                <Button style={{ margin: '10px'}} variant='contained' disabled={!submitActive}>Submit</Button>
-            </div>
-            <Button style={{ margin: '10px'}} variant='contained' onClick={() => {submitHandler(submitActive)}}>TEST</Button>
-        </div>
+        <Card variant='elevation'> Some
+        <CardContent>
+            <Grid container direction="row" justifyContent="center" alignItems="center">
+            <form>
+                <Grid item>
+                    <EmailFormInput />
+                </Grid>
+                <Grid item>
+                    <PasswordFormInput />
+                </Grid>
+                <Grid item>
+                    <FirstNameFormInput />
+                </Grid>
+                <Grid item>
+                    <LastNameFormInput />
+                </Grid>
+                <Grid item>
+                    <Button variant='contained' disabled={!submitActive}>Submit</Button>
+                </Grid>
+            </form>
+            </Grid>
+            </CardContent>
+        </Card>
     )
 }
