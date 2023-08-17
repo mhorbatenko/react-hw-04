@@ -2,9 +2,8 @@
 import { TextField } from "@mui/material";
 import { useState } from "react";
 
-import {isUserEmailValid} from "src/utils/validation";
+import {isEmailPassValidation} from "src/utils/validation";
 
-const regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
 
 export default function EmailFormInput() {
 
@@ -12,8 +11,7 @@ export default function EmailFormInput() {
 
     const handleUserEmail = () => {
         console.log('data', event.target.value, 'state', isEmailValid)
-        // console.log('data', event.target.value)
-        if (isUserEmailValid(event.target.value)) {
+        if (isEmailPassValidation(event.target.value)) {
             setEmailValid(true)
             return
         }
@@ -22,13 +20,25 @@ export default function EmailFormInput() {
     }
 
     return (
-            <TextField
-                error={!isEmailValid}
-                id="outlined-basic"
-                onChange={handleUserEmail}
-                label="Outlined"
-                variant="outlined"
-                helperText='Not valid email'
-            />
+        <>
+            {
+                isEmailValid ?
+                <TextField
+                    id="outlined-basic"
+                    onChange={handleUserEmail}
+                    label="Outlined"
+                    variant="outlined"
+                    helperText='Please type your email'
+                /> :
+                <TextField
+                    error={isEmailValid}
+                    id="outlined-basic"
+                    onChange={handleUserEmail}
+                    label="Outlined"
+                    variant="outlined"
+                    helperText='Not valid email'
+                />
+            }
+        </>
     )
 }

@@ -1,9 +1,50 @@
 
 import TextField from '@mui/material/TextField';
 
-export default function FirstNameFormInput() {
+
+import { isFirstNamePassValidation } from '@/utils/validation';
+import { useState } from 'react';
+
+
+
+export default function FirstNameFormInput({handler, valid}) {
+
+    const [firstName, setFirstName] = useState('')
+
+    const handleFirstName = (event) => {
+
+        setFirstName(event.target.value)
+
+        if (isFirstNamePassValidation(firstName)) {
+            return handler(true)
+        }
+        return handler(false)
+    }
 
     return (
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" helperText='Your first name'/>
+        <>
+        {
+        firstName.length === 0 ?
+            <TextField
+                id="outlined-basic"
+                label="firstName"
+                variant="outlined"
+                helperText='Your first name'
+                value={firstName}
+                onChange={handleFirstName}
+                error={false}>
+            </TextField>
+            :
+            <TextField
+                    id="outlined-basic"
+                    label="firstName"
+                    variant="outlined"
+                    helperText='Your first name'
+                    value={firstName}
+                    onChange={handleFirstName}
+                    error={!valid}>
+                </TextField>
+        }
+        </>
     )
 }
