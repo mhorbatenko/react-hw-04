@@ -35,7 +35,7 @@ export  default function LastNameFormInput({validationHandler, isInputValid}) {
                     id="outlined-basic"
                     label="Last Name"
                     variant="outlined"
-                    helperText={!isInputValid ? 'input not valid': 'type your last name'}
+                    helperText={!isInputValid ? 'last name not valid': 'type your last name'}
                     value={lastName}
                     onChange={handleLastName}
                     error={!isInputValid}>

@@ -37,7 +37,7 @@ export default function FirstNameFormInput({validationHandler, isInputValid}) {
                     id="outlined-basic"
                     label="First Name"
                     variant="outlined"
-                    helperText={!isInputValid ? 'input not valid': 'type your first name'}
+                    helperText={!isInputValid ? 'first name not valid': 'type your first name'}
                     onChange={handleFirstName}
                     error={!isInputValid}>
             </TextField>

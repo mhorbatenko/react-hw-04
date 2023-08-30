@@ -5,40 +5,39 @@ import { useState } from "react";
 import {isEmailPassValidation} from "src/utils/validation";
 
 
-export default function EmailFormInput() {
+export default function EmailFormInput({validationHandler, isInputValid}) {
 
-    const [isEmailValid, setEmailValid] = useState(false)
+    const [email, setEmail] = useState('')
 
-    const handleUserEmail = () => {
-        console.log('data', event.target.value, 'state', isEmailValid)
-        if (isEmailPassValidation(event.target.value)) {
-            setEmailValid(true)
-            return
-        }
-        setEmailValid(false)
-        return
+    const handleUserEmail = (event) => {
+        setEmail(event.target.value)
+        return validationHandler(
+            isEmailPassValidation(event.target.value)
+        )
     }
 
     return (
         <>
-            {
-                isEmailValid ?
-                <TextField
+        {
+        email.length === 0 ?
+            <TextField
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                helperText='type your email'
+                onChange={handleUserEmail}
+                error={false}>
+            </TextField>
+            :
+            <TextField
                     id="outlined-basic"
-                    onChange={handleUserEmail}
-                    label="Outlined"
+                    label="Email"
                     variant="outlined"
-                    helperText='Please type your email'
-                /> :
-                <TextField
-                    error={isEmailValid}
-                    id="outlined-basic"
+                    helperText={!isInputValid ? 'email not valid': 'type your email'}
                     onChange={handleUserEmail}
-                    label="Outlined"
-                    variant="outlined"
-                    helperText='Not valid email'
-                />
-            }
+                    error={!isInputValid}>
+            </TextField>
+        }
         </>
     )
 }

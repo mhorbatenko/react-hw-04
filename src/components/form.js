@@ -4,7 +4,7 @@
 import { Button } from '@mui/material';
 // import { memo, useState } from 'react';
 
-// import EmailFormInput from './emailFormInput';
+import EmailFormInput from './emailFormInput';
 import FirstNameFormInput from './firstNameFormInput';
 import LastNameFormInput from './lastNameFormInput';
 // import PasswordFormInput from './passwordFormInput';
@@ -25,6 +25,7 @@ const Form = () => {
 
     const [isFirstNameValid, setFirstNameValid] = useState(false)
     const [isLastNameValid, setLastnameValid] = useState(false)
+    const [isEmailValid, setEmailValid] = useState(false)
 
     const handleUserData = () => {
         setUserData((prevState) => ({
@@ -33,22 +34,22 @@ const Form = () => {
         }))
     }
 
-    const inputsValidationState = [isFirstNameValid, isLastNameValid]
+    const inputsValidationState = [isFirstNameValid, isLastNameValid, isEmailValid]
 
 
     const isSubmitAllowedCheck = (inputValidationState) => inputValidationState === true;
     const isSubmitAllowed = inputsValidationState.every(isSubmitAllowedCheck)
 
-
-    // console.log('submit check', isSubmitAllowed)
     console.log('fname state', isFirstNameValid)
-    // console.log('checks', inputsValidationState)
 
     return (
         <Card variant='elevation'>
         <CardContent>
             <Grid container direction="row" justifyContent="center" alignItems="center">
             <form>
+                <Grid item>
+                    <EmailFormInput validationHandler={setEmailValid} isInputValid={isEmailValid}/>
+                </Grid>
                 <Grid item>
                     <FirstNameFormInput validationHandler={setFirstNameValid} isInputValid={isFirstNameValid}/>
                 </Grid>
