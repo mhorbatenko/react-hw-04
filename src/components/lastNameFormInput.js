@@ -4,12 +4,12 @@ import { isLastNamePassValidation } from "@/utils/validation"
 import { useState } from "react"
 
 
-export  default function LastNameFormInput({validationHandler, isInputValid}) {
+export  default function LastNameFormInput({userState, validationHandler, isInputValid}) {
 
     const [lastName, setLastName] = useState('')
 
     const handleLastName = (event) => {
-
+        userState.lastName = event.target.value
         setLastName(event.target.value)
 
         return validationHandler(

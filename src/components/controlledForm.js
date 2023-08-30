@@ -29,6 +29,7 @@ export default function ControlledForm () {
             ...prevState,
             [event.target.name]: event.target.value
         }))
+        console.log(userData)
     }
 
     const inputsValidationState = [isFirstNameValid, isLastNameValid, isEmailValid, isPasswordValid]
@@ -38,27 +39,27 @@ export default function ControlledForm () {
     const isSubmitAllowed = inputsValidationState.every(isSubmitAllowedCheck)
 
     return (
-        <Card>
-            <CardContent>
-            <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    Controlled pattern
+            <Card>
+                <CardContent>
+                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                        Controlled pattern
                     </Typography>
-                <Grid item>
-                    <FirstNameFormInput validationHandler={setFirstNameValid} isInputValid={isFirstNameValid}/>
-                </Grid>
-                <Grid item>
-                    <LastNameFormInput validationHandler={setLastnameValid} isInputValid={isLastNameValid}/>
-                </Grid>
-                <Grid item>
-                    <EmailFormInput validationHandler={setEmailValid} isInputValid={isEmailValid}/>
-                </Grid>
-                <Grid item>
-                    <PasswordFormInput validationHandler={setPasswordValid} isInputValid={isPasswordValid}/>
-                </Grid>
-                <Grid item>
-                    <Button disabled={!isSubmitAllowed} variant='contained' onClick={handleUserData}>Submit</Button>
-                </Grid>
-            </CardContent>
-        </Card>
+                    <Grid item>
+                        <FirstNameFormInput userState={userData} validationHandler={setFirstNameValid} isInputValid={isFirstNameValid}/>
+                    </Grid>
+                    <Grid item>
+                        <LastNameFormInput userState={userData} validationHandler={setLastnameValid} isInputValid={isLastNameValid}/>
+                    </Grid>
+                    <Grid item>
+                        <EmailFormInput userState={userData} validationHandler={setEmailValid} isInputValid={isEmailValid}/>
+                    </Grid>
+                    <Grid item>
+                        <PasswordFormInput userState={userData} validationHandler={setPasswordValid} isInputValid={isPasswordValid}/>
+                    </Grid>
+                    <Grid item>
+                        <Button type={'submit'} disabled={!isSubmitAllowed} variant='contained' onClick={handleUserData}>Submit</Button>
+                    </Grid>
+                </CardContent>
+            </Card>
     )
 }

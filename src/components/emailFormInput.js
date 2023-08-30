@@ -5,12 +5,13 @@ import { useState } from "react";
 import {isEmailPassValidation} from "src/utils/validation";
 
 
-export default function EmailFormInput({validationHandler, isInputValid}) {
+export default function EmailFormInput({userState, validationHandler, isInputValid}) {
 
     const [email, setEmail] = useState('')
 
     const handleUserEmail = (event) => {
         setEmail(event.target.value)
+        userState.email = event.target.value
         return validationHandler(
             isEmailPassValidation(event.target.value)
         )
