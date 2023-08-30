@@ -16,5 +16,6 @@ export function isLastNamePassValidation(lastName) {
 }
 
 export function isPasswordPassValidation(password) {
-    return true;
+    const regex = new RegExp('^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{6,10}$');
+    return regex.test(password);
 }

@@ -7,7 +7,7 @@ import { Button } from '@mui/material';
 import EmailFormInput from './emailFormInput';
 import FirstNameFormInput from './firstNameFormInput';
 import LastNameFormInput from './lastNameFormInput';
-// import PasswordFormInput from './passwordFormInput';
+import PasswordFormInput from './passwordFormInput';
 import {Card, CardContent} from '@mui/material';
 import {Grid} from '@mui/material';
 import { useState } from 'react';
@@ -26,21 +26,20 @@ const Form = () => {
     const [isFirstNameValid, setFirstNameValid] = useState(false)
     const [isLastNameValid, setLastnameValid] = useState(false)
     const [isEmailValid, setEmailValid] = useState(false)
+    const [isPasswordValid, setPasswordValid] = useState(false)
 
-    const handleUserData = () => {
+    const handleUserData = (event) => {
         setUserData((prevState) => ({
             ...prevState,
             [event.target.name]: event.target.value
         }))
     }
 
-    const inputsValidationState = [isFirstNameValid, isLastNameValid, isEmailValid]
+    const inputsValidationState = [isFirstNameValid, isLastNameValid, isEmailValid, isPasswordValid]
 
 
     const isSubmitAllowedCheck = (inputValidationState) => inputValidationState === true;
     const isSubmitAllowed = inputsValidationState.every(isSubmitAllowedCheck)
-
-    console.log('fname state', isFirstNameValid)
 
     return (
         <Card variant='elevation'>
@@ -56,8 +55,11 @@ const Form = () => {
                 <Grid item>
                     <LastNameFormInput validationHandler={setLastnameValid} isInputValid={isLastNameValid}/>
                 </Grid>
+                  <Grid item>
+                    <PasswordFormInput validationHandler={setPasswordValid} isInputValid={isPasswordValid}/>
+                </Grid>
                 <Grid item>
-                    <Button disabled={!isSubmitAllowed} variant='contained'>Submit</Button>
+                    <Button disabled={!isSubmitAllowed} variant='contained' onClick={handleUserData}>Submit</Button>
                 </Grid>
             </form>
             </Grid>
