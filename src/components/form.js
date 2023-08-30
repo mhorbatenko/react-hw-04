@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 
 // import EmailFormInput from './emailFormInput';
 import FirstNameFormInput from './firstNameFormInput';
-// import LastNameFormInput from './lastNameFormInput';
+import LastNameFormInput from './lastNameFormInput';
 // import PasswordFormInput from './passwordFormInput';
 import {Card, CardContent} from '@mui/material';
 import {Grid} from '@mui/material';
@@ -24,6 +24,7 @@ const Form = () => {
     )
 
     const [isFirstNameValid, setFirstNameValid] = useState(false)
+    const [isLastNameValid, setLastnameValid] = useState(false)
 
     const handleUserData = () => {
         setUserData((prevState) => ({
@@ -31,7 +32,17 @@ const Form = () => {
             [event.target.name]: event.target.value
         }))
     }
-    console.log('state', isFirstNameValid)
+
+    const inputsValidationState = [isFirstNameValid, isLastNameValid]
+
+
+    const isSubmitAllowedCheck = (inputValidationState) => inputValidationState === true;
+    const isSubmitAllowed = inputsValidationState.every(isSubmitAllowedCheck)
+
+
+    // console.log('submit check', isSubmitAllowed)
+    console.log('fname state', isFirstNameValid)
+    // console.log('checks', inputsValidationState)
 
     return (
         <Card variant='elevation'>
@@ -39,10 +50,13 @@ const Form = () => {
             <Grid container direction="row" justifyContent="center" alignItems="center">
             <form>
                 <Grid item>
-                    <FirstNameFormInput handler={setFirstNameValid} valid={isFirstNameValid}/>
+                    <FirstNameFormInput validationHandler={setFirstNameValid} isInputValid={isFirstNameValid}/>
                 </Grid>
                 <Grid item>
-                    <Button variant='contained'>Submit</Button>
+                    <LastNameFormInput validationHandler={setLastnameValid} isInputValid={isLastNameValid}/>
+                </Grid>
+                <Grid item>
+                    <Button disabled={!isSubmitAllowed} variant='contained'>Submit</Button>
                 </Grid>
             </form>
             </Grid>

@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 
 
-export default function FirstNameFormInput({handler, valid}) {
+export default function FirstNameFormInput({validationHandler, isInputValid}) {
 
     const [firstName, setFirstName] = useState('')
 
@@ -15,10 +15,9 @@ export default function FirstNameFormInput({handler, valid}) {
 
         setFirstName(event.target.value)
 
-        if (isFirstNamePassValidation(firstName)) {
-            return handler(true)
-        }
-        return handler(false)
+        return validationHandler(
+            isFirstNamePassValidation(event.target.value)
+        )
     }
 
     return (
@@ -27,23 +26,21 @@ export default function FirstNameFormInput({handler, valid}) {
         firstName.length === 0 ?
             <TextField
                 id="outlined-basic"
-                label="firstName"
+                label="First Name"
                 variant="outlined"
-                helperText='Your first name'
-                value={firstName}
+                helperText='type your first name'
                 onChange={handleFirstName}
                 error={false}>
             </TextField>
             :
             <TextField
                     id="outlined-basic"
-                    label="firstName"
+                    label="First Name"
                     variant="outlined"
-                    helperText='Your first name'
-                    value={firstName}
+                    helperText={!isInputValid ? 'input not valid': 'type your first name'}
                     onChange={handleFirstName}
-                    error={!valid}>
-                </TextField>
+                    error={!isInputValid}>
+            </TextField>
         }
         </>
     )
