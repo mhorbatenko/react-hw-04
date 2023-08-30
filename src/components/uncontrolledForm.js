@@ -1,51 +1,32 @@
 import { Button } from '@mui/material';
-import EmailFormInput from './emailFormInput';
-import FirstNameFormInput from './firstNameFormInput';
-import LastNameFormInput from './lastNameFormInput';
-import PasswordFormInput from './passwordFormInput';
 
-import { isFirstNamePassValidation } from '@/utils/validation';
+import {
+    isFirstNamePassValidation,
+    isLastNamePassValidation,
+    isEmailPassValidation,
+    isPasswordPassValidation
+} from '@/utils/validation';
 import {Card, CardContent, Typography} from '@mui/material';
 import {Grid} from '@mui/material';
 import { useState, useRef } from 'react';
 
 export default function UncontrolledForm () {
-    
-    const [userData, setUserData] = useState(
-        {
-            'firstName': '',
-            'lastName': '',
-            'email': '',
-            'password': ''
-        }
-    )
-
-    const [isFirstNameValid, setFirstNameValid] = useState(false)
-    const [isLastNameValid, setLastnameValid] = useState(false)
-    const [isEmailValid, setEmailValid] = useState(false)
-    const [isPasswordValid, setPasswordValid] = useState(false)
-
-    const handleUserData = (event) => {
-        setUserData((prevState) => ({
-            ...prevState,
-            [event.target.name]: event.target.value
-        }))
-    }
-
-    const inputsValidationState = [isFirstNameValid, isLastNameValid, isEmailValid, isPasswordValid]
-
-
-    const isSubmitAllowedCheck = (inputValidationState) => inputValidationState === true;
-    const isSubmitAllowed = inputsValidationState.every(isSubmitAllowedCheck)
-
 
     const firstNameRef = useRef();
+    const lastNameRef = useRef();
+    const emailRef = useRef();
+    const passworfRef = useRef();
 
     const [validationPassed, setValidationPassed] = useState(false)
 
     const handleSubmit = () => {
 
-        if(isFirstNamePassValidation(firstNameRef.current.value)) {
+        if (
+            isFirstNamePassValidation(firstNameRef.current.value) &&
+            isLastNamePassValidation(lastNameRef.current.value) &&
+            isEmailPassValidation(emailRef.current.value) &&
+            isPasswordPassValidation(passworfRef.current.value)
+        ) {
             setValidationPassed(true)
             return
         }
@@ -78,6 +59,7 @@ export default function UncontrolledForm () {
                         <label for='lname'>
                             Last Name:
                             <input
+                                ref={lastNameRef}
                                 type='text'
                                 label='lname'
                             ></input>
@@ -88,6 +70,7 @@ export default function UncontrolledForm () {
                         <label for='email'>
                             Email:
                             <input
+                                ref={emailRef}
                                 type='email'
                                 label='email'
                             ></input>
@@ -98,6 +81,7 @@ export default function UncontrolledForm () {
                         <label for='password'>
                             Password:
                             <input
+                                ref={passworfRef}
                                 type='password'
                                 label='password'
                             ></input>
@@ -114,7 +98,12 @@ export default function UncontrolledForm () {
                             color="text.secondary"
                             gutterBottom>PASSED
                         </Typography>
-                        : null
+                        :
+                        <Typography
+                        sx={{ fontSize: 14 }}
+                        color="text.secondary"
+                        gutterBottom>Not valid input form
+                    </Typography>
                     }
             </CardContent>
         </Card>
