@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 
 
 import { isFirstNamePassValidation } from '@/utils/validation';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 
 
@@ -20,6 +20,9 @@ export default function FirstNameFormInput({validationHandler, isInputValid}) {
         )
     }
 
+    const nameFieldRef = useRef();
+
+    console.log(nameFieldRef)
     return (
         <>
         {
@@ -31,6 +34,7 @@ export default function FirstNameFormInput({validationHandler, isInputValid}) {
                 helperText='type your first name'
                 onChange={handleFirstName}
                 error={false}>
+                ref={nameFieldRef}
             </TextField>
             :
             <TextField

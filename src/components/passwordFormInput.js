@@ -4,7 +4,7 @@ import { isPasswordPassValidation } from "@/utils/validation"
 import { useState } from "react"
 
 
-export  default function PasswordFormInput({validationHandler, isInputValid}) {
+export default function PasswordFormInput({validationHandler, isInputValid}) {
 
     const [password, setPassword] = useState('')
 
